@@ -1,0 +1,97 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf",
+      "PackagePath": "staticwebassets\\Image"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf232845062.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf232845062.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf233644566.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf233644566.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf233754595.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf233754595.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf233852873.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf233852873.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf233917975.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf233917975.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf234107337.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf234107337.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf234112262.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf234112262.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf234121010.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf234121010.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf234139041.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf234139041.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf234157353.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf234157353.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf244113313.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf244113313.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf244117386.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf244117386.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf244542177.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf244542177.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf244622175.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf244622175.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf244636159.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf244636159.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf244710123.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf244710123.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf244731201.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf244731201.pdf"
+    },
+    {
+      "Id": "C:\\Users\\tnyamande\\source\\repos\\LeaveManagementSystemAPI\\LeaveManagementSystemAPI\\wwwroot\\Image\\Get_Started_With_Smallpdf244758127.pdf",
+      "PackagePath": "staticwebassets\\Image\\Get_Started_With_Smallpdf244758127.pdf"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.LeaveManagementSystemAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.LeaveManagementSystemAPI.props",
+      "PackagePath": "build\\LeaveManagementSystemAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.LeaveManagementSystemAPI.props",
+      "PackagePath": "buildMultiTargeting\\LeaveManagementSystemAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.LeaveManagementSystemAPI.props",
+      "PackagePath": "buildTransitive\\LeaveManagementSystemAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

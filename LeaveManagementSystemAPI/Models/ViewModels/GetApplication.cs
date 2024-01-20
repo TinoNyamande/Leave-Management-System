@@ -7,8 +7,6 @@
         public DateTime EndDate { get; set; }
         public string? Description { get; set; }
         public string? Username { get; set; }
-        public byte[] Myfile { get; set; }
         public string? Status { get; set; }
-        public string? FileName { get; set; }
     }
 }

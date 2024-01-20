@@ -153,3 +153,4 @@ C:\Users\tnyamande\source\repos\LeaveManagementSystemAPI\LeaveManagementSystemAP
 C:\Users\tnyamande\source\repos\LeaveManagementSystemAPI\LeaveManagementSystemAPI\bin\Debug\net8.0\MailKit.dll
 C:\Users\tnyamande\source\repos\LeaveManagementSystemAPI\LeaveManagementSystemAPI\bin\Debug\net8.0\MimeKit.dll
 C:\Users\tnyamande\source\repos\LeaveManagementSystemAPI\LeaveManagementSystemAPI\bin\Debug\net8.0\LeaveManagementSystemAPI.staticwebassets.runtime.json
+C:\Users\tnyamande\source\repos\LeaveManagementSystemAPI\LeaveManagementSystemAPI\obj\Debug\net8.0\LeaveManagementSystemAPI.sourcelink.json

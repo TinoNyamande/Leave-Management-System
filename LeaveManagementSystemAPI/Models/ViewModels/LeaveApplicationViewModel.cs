@@ -7,7 +7,7 @@
         public DateTime EndDate { get; set; }
         public string? Description { get; set; }
         public string? Username { get; set; }
+        public int DaysAppliedFor { get; set; }
 
-        public IFormFile? Myfile { get; set; }
     }
 }

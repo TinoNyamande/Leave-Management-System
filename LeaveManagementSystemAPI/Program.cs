@@ -8,12 +8,33 @@ using LeaveManagementSystemAPI.Models;
 using Microsoft.Data.SqlClient;
 using LeaveManagementSystemAPI.Configuration;
 using LeaveManagementSystemAPI.MyServices;
+using LeaveManagementSystemAPI.EmailTemplates;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//   .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("My name is Tinotenda Nyamande and i am tall ")),
+        ValidateAudience = false,
+        ValidateIssuer = false
+
+    };
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("ConnStr")));
@@ -36,8 +57,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection(nameof(MailSettings)));
-builder.Services.AddTransient<IMailService, MailService>();
+builder.Services.AddSingleton<IMailService, MailService>();
+builder.Services.AddSingleton<IEmailService, EmailService>();
 builder.Services.AddScoped<IGetApplicationBy, GetApplicationBy>();
+builder.Services.AddScoped<ILeaveApplication, LeaveApplication>();
+builder.Services.AddScoped<ICalculateLeaveDays, CalculateLeaveDays>();
 
 var app = builder.Build();
 app.UseCors("myAppCors");

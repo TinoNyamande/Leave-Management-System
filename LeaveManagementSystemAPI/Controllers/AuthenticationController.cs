@@ -52,12 +52,18 @@ namespace LeaveManagementSystemAPI.Controllers
             //check if user is null
             if(registerUser  == null || !ModelState.IsValid)
             {
-                return BadRequest("Invalid object");
+                return BadRequest(new
+                {
+                    message = "Invalid object"
+                });
             }
             var userExists = await _userManager.FindByEmailAsync(registerUser.Email);
             if (userExists != null)
             {
-                return BadRequest("User already exists");
+                return BadRequest(new
+                {
+                    message = "User already exists"
+                });
             }
             var role = registerUser.Role;
             if ( await _roleManager.RoleExistsAsync(role))
@@ -87,14 +93,20 @@ namespace LeaveManagementSystemAPI.Controllers
                         return Ok("Confirmation email has been sent successfully");
                     }else
                     {
-                        return BadRequest($"Failed to send confirmation email {res}");
+                        return BadRequest(new
+                        {
+                            message = $"Failed to send confirmation email {res}"
+                        });
                     }
                      
                     
                 }
                 else
                 {
-                    return BadRequest(result);
+                    return BadRequest(new
+                    {
+                        message = result
+                    });
                 }
             }else
             {

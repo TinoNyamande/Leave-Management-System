@@ -2,9 +2,11 @@
 using LeaveManagementSystemAPI.Models.ViewModels;
 using LeaveManagementSystemAPI.MyServices;
 using MailKit.Net.Imap;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web.Resource;
+using System;
 
 namespace LeaveManagementSystemAPI.Controllers
 {
@@ -17,14 +19,16 @@ namespace LeaveManagementSystemAPI.Controllers
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IGetApplicationBy _getApplicationBy;
+        private readonly ICalculateLeaveDays _calculateLeaveDays;
 
-        public LeaveApplication(ApplicationDbContext context, IGetApplicationBy getApplicationBy
+        public LeaveApplication(ICalculateLeaveDays calculateLeaveDays, ApplicationDbContext context, IGetApplicationBy getApplicationBy
 ,IConfiguration configuration,IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _configuration = configuration;
             _hostEnvironment = hostEnvironment;
             _getApplicationBy = getApplicationBy;
+            _calculateLeaveDays = calculateLeaveDays;
 
         }
         [HttpPost("LeaveApplications")]
@@ -37,15 +41,8 @@ namespace LeaveManagementSystemAPI.Controllers
                     message = "Invalid request"
                 });
             }
-            string wwwRootPath = _hostEnvironment.WebRootPath;
-            string fileName = Path.GetFileNameWithoutExtension(leaveApplicationVM.Myfile.FileName);
-            string extension = Path.GetExtension(leaveApplicationVM.Myfile.FileName);
-            var myFileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            string path = Path.Combine(wwwRootPath + "/Image/", myFileName);
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                await leaveApplicationVM.Myfile.CopyToAsync(fileStream);
-            }
+         
+            
             //product.Id = Guid.NewGuid().ToString();
             LeaveApplicationForm leaveApplicationForm = new LeaveApplicationForm
             {
@@ -57,10 +54,11 @@ namespace LeaveManagementSystemAPI.Controllers
                 Username = leaveApplicationVM.Username,
                 Status = "NEW",
                 ApplicationDate = DateTime.Now,
-                FilePath = myFileName
+                DaysAppliedFor = leaveApplicationVM.DaysAppliedFor
+                
 
         };
-            _context.Add(leaveApplicationForm);
+            await _context.AddAsync(leaveApplicationForm);
             await _context.SaveChangesAsync();
             return Ok(new
             {
@@ -70,7 +68,7 @@ namespace LeaveManagementSystemAPI.Controllers
         [HttpGet("GetApplicationByUsername")]
         public async Task<IActionResult> GetApplicationByUserName (string Username)
         {
-            var applications = _context.LeaveApplicationForm.Where(a => a.Username == Username).ToList();
+            var applications = await _context.LeaveApplicationForm.Where(a => a.Username == Username).ToListAsync();
             if (applications == null)
             {
                 return BadRequest(new
@@ -83,7 +81,7 @@ namespace LeaveManagementSystemAPI.Controllers
         [HttpGet("GetApplicationById")]
         public async Task<IActionResult> GetApplicationById(string Id)
         {
-            var application = _context.LeaveApplicationForm.FirstOrDefault(a => a.Id == Id);
+            var application = await _context.LeaveApplicationForm.FirstOrDefaultAsync(a => a.Id == Id);
             if (application == null)
             {
                 return BadRequest(new
@@ -91,7 +89,6 @@ namespace LeaveManagementSystemAPI.Controllers
                     message = "Application not found"
                 });
             }
-            string wwwRootPath = _hostEnvironment.WebRootPath;
 
             GetApplication leaveApplicationVM = new GetApplication
             {
@@ -100,16 +97,15 @@ namespace LeaveManagementSystemAPI.Controllers
                 EndDate = application.EndDate,
                 LeaveType = application.LeaveType,
                 Description = application.Description,
-                FileName = application.FilePath,
-                Myfile = System.IO.File.ReadAllBytes(Path.Combine(wwwRootPath + "/Image/", application.FilePath)),
                 Status = application.Status
             };
             return Ok(leaveApplicationVM);
         }
+        //[Authorize]
         [HttpGet("GetAllNewApplications")]
         public async Task<IActionResult> GetAllNewApplications()
         {
-            var applications = _context.LeaveApplicationForm.Where(a=>a.Status == "NEW").ToList();
+            var applications = await _context.LeaveApplicationForm.Where(a=>a.Status == "NEW").ToListAsync();
             if (applications == null)
             {
                 return BadRequest(new
@@ -123,7 +119,7 @@ namespace LeaveManagementSystemAPI.Controllers
         [HttpGet("GetAllApplications")]
         public async Task<IActionResult> GetAllApplications()
         {
-            var applications = _context.LeaveApplicationForm.ToList();
+            var applications = await _context.LeaveApplicationForm.ToListAsync();
             if (applications == null)
             {
                 return BadRequest(new
@@ -170,6 +166,52 @@ namespace LeaveManagementSystemAPI.Controllers
             {
                 message = "Leave Application has been rejected"
             });
+        }
+        [HttpGet("GetDays")]
+        public async Task<IActionResult> GetDays(string username)
+        {
+            var currentDate = DateTime.Now;
+            var date = new DateTime(currentDate.Year, 1, 31);
+
+            var application =  _context.LeaveApplicationForm
+                .Where(a => a.Username == username && a.StartDate <= date)
+                .Sum(a=>a.DaysAppliedFor);
+
+            return Ok(application);
+
+
+
+        }
+        [HttpGet("GetDaysPerMonth")]
+        public async Task<IActionResult> GetDaysPerMonth(string username)
+        {
+
+            var userExists = await _context.LeaveApplicationForm.FirstOrDefaultAsync(a => a.Username == username);
+            if (userExists == null)
+            {
+                return BadRequest(new
+                {
+                    message = "No applications by this user"
+                });
+            }
+            try
+            {
+                var daysPerMonth = await _calculateLeaveDays.CalculateDaysPerMonth(username);
+                var daysPerType = await _calculateLeaveDays.CalculateDaysPerType(username);
+                var res = new
+                {
+                    DaysPerMonth = daysPerMonth,
+                    DaysPerType = daysPerType
+                };
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.ToString()
+                });
+            }
         }
         [HttpGet("GetApplicationBy")]
         public async Task<IActionResult> GetApplicationBy(string? Id, string? Status, string? Username, string? LeaveType)
@@ -246,5 +288,6 @@ namespace LeaveManagementSystemAPI.Controllers
                 });
             }
         }
+ 
     }
 }

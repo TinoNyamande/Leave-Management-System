@@ -16,8 +16,8 @@
         public MailData(
             List<string> to,
             string? subject,
-            string? displayName = null,
             string? body = null,
+            string? displayName = null,
             string? from = null,
             List<string>? bcc = null,
             List<string>? cc = null, 
